@@ -16,8 +16,9 @@ import (
 )
 
 func main() {
-	//proxyDial, err := proxy.SOCKS5("tcp", "72.210.221.197:4145", nil, proxy.Direct)
-	proxyDial, err := proxy.SOCKS5("tcp", "68.71.247.130:4145", nil, proxy.Direct)
+	proxyIp := os.Getenv("PROXY_IP")
+
+	proxyDial, err := proxy.SOCKS5("tcp", proxyIp, nil, proxy.Direct)
 	if err != nil {
 		log.Fatalln("Cannot connect to proxy:", err)
 	}
@@ -44,7 +45,7 @@ func main() {
 		logTmp.Date = time.Now().Add(time.Hour * -5)
 	}
 
-	if stats.LastUpdate == logTmp.Date {
+	if stats.LastUpdate.Format("2006-Jan-02/15:04") == logTmp.Date.Format("2006-Jan-02/15:04") {
 		fmt.Println("No new updates.")
 		return
 	}
