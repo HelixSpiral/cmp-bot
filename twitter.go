@@ -1,11 +1,12 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
+	"io"
 	"log"
 	"os"
 
-	"github.com/dghubble/go-twitter/twitter"
 	"github.com/dghubble/oauth1"
 )
 
@@ -20,17 +21,21 @@ func sendMessages(messages []string) error {
 
 	httpClient := config.Client(oauth1.NoContext, token)
 
-	twitterClient := twitter.NewClient(httpClient)
-
 	for _, message := range messages {
 		log.Printf("Tweeting message: %s\r\n", message)
-		tweet, resp, err := twitterClient.Statuses.Update(message, nil)
+
+		resp, err := httpClient.Post("https://api.twitter.com/2/tweets", "application/json",
+			bytes.NewBuffer([]byte(fmt.Sprintf(`{"text": "%s"}`, message))))
 		if err != nil {
 			return err
 		}
 
-		fmt.Println(tweet)
-		fmt.Println(resp)
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return err
+		}
+
+		log.Println("Tweet:", string(body))
 	}
 
 	return nil
