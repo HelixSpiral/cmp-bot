@@ -3,9 +3,7 @@ package main
 import "time"
 
 type Cache struct {
-	Date                 time.Time
-	XAppLimit24HourReset int64
-	XAppRateLimited      bool
+	Date time.Time
 }
 
 type MqttMessage struct {
