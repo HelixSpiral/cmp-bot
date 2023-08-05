@@ -23,6 +23,13 @@ func main() {
 	accessToken := os.Getenv("ACCESS_TOKEN")
 	accessSecret := os.Getenv("ACCESS_SECRET")
 
+	// Some initial Mastodon setup
+	mastodonServer := os.Getenv("MASTODON_SERVER")
+	mastodonClientID := os.Getenv("MASTODON_CLIENT_ID")
+	mastodonClientSecret := os.Getenv("MASTODON_CLIENT_SECRET")
+	mastodonUser := os.Getenv("MASTODON_USERNAME")
+	mastodonPass := os.Getenv("MASTODON_PASSWORD")
+
 	// Some initial MQTT setup
 	mqttBroker := os.Getenv("MQTT_BROKER")
 	mqttClientId := os.Getenv("MQTT_CLIENT_ID")
@@ -80,6 +87,12 @@ func main() {
 		<-limiter
 
 		jsonMsg, err := json.Marshal(&MqttMessage{
+			MastodonServer:       mastodonServer,
+			MastodonClientID:     mastodonClientID,
+			MastodonClientSecret: mastodonClientSecret,
+			MastodonUser:         mastodonUser,
+			MastodonPass:         mastodonPass,
+
 			TwitterConsumerKey:    consumerKey,
 			TwitterConsumerSecret: consumerSecret,
 			TwitterAccessToken:    accessToken,
