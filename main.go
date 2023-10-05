@@ -69,6 +69,12 @@ func main() {
 	}
 	fmt.Printf("%+v\r\n", stats)
 
+	if stats.NoOutages {
+		fmt.Println("No current outages")
+
+		return
+	}
+
 	if stats.LastUpdate.Format("2006-Jan-02/15:04") == logTmp.Date.Format("2006-Jan-02/15:04") {
 		fmt.Println("No new updates.")
 		return
