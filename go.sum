@@ -1,5 +1,7 @@
 github.com/HelixSpiral/cmpscraper v0.0.0-20231005025247-d0727e18e4b6 h1:mW41QdVtuMT8FNN7+c9bSZjKOfw9VoQVKoaZFQUJR/0=
 github.com/HelixSpiral/cmpscraper v0.0.0-20231005025247-d0727e18e4b6/go.mod h1:e6ljJPMft++TnY4dyBSX8Zo7Xwv41v4OIidYAN+0bJU=
+github.com/HelixSpiral/cmpscraper v0.0.0-20231029230856-0b9a57e36416 h1:eq9kRlecDLjNS3KVLndWy0j/l1yTKnrXqIYbuud80Es=
+github.com/HelixSpiral/cmpscraper v0.0.0-20231029230856-0b9a57e36416/go.mod h1:EfFK8HYDRQIWLpn8XEy6YL4yf6EfS9PmkM3o9MtLpIc=
 github.com/eclipse/paho.mqtt.golang v1.4.3 h1:2kwcUGn8seMUfWndX0hGbvH8r7crgcJguQNCyp70xik=
 github.com/eclipse/paho.mqtt.golang v1.4.3/go.mod h1:CSYvoAlsMkhYOXh/oKyxa8EcBci6dVkLCbo5tTC1RIE=
 github.com/gorilla/websocket v1.5.0 h1:PPwGk2jz7EePpoHN/+ClbZu8SPxiqlu12wZP/3sWmnc=
@@ -8,5 +10,7 @@ github.com/hashicorp/go.net v0.0.1 h1:sNCoNyDEvN1xa+X0baata4RdcpKwcMS6DH+xwfqPgj
 github.com/hashicorp/go.net v0.0.1/go.mod h1:hjKkEWcCURg++eb33jQU7oqQcI9XDCnUzHA0oac0k90=
 golang.org/x/net v0.15.0 h1:ugBLEUaxABaB5AJqW9enI0ACdci2RUd4eP51NTBvuJ8=
 golang.org/x/net v0.15.0/go.mod h1:idbUs1IY1+zTqbi8yxTbhexhEEk5ur9LInksu6HrEpk=
+golang.org/x/net v0.17.0 h1:pVaXccu2ozPjCXewfr1S7xza/zcXTity9cCdXQYSjIM=
+golang.org/x/net v0.17.0/go.mod h1:NxSsAGuq816PNPmqtQdLE42eU2Fs7NoRIZrHJAlaCOE=
 golang.org/x/sync v0.3.0 h1:ftCYgMx6zT/asHUrPw8BLLscYtGznsLAnjq5RH9P66E=
 golang.org/x/sync v0.3.0/go.mod h1:FU7BRWz2tNW+3quACPkgCx/L+uEAv1htQ0V83Z9Rj+Y=
