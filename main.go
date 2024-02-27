@@ -11,10 +11,18 @@ import (
 	"strings"
 	"time"
 
-	"github.com/HelixSpiral/cmpscraper"
+	"github.com/HelixSpiral/cmpscraper/v2"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"github.com/hashicorp/go.net/proxy"
 )
+
+var DEBUG = false
+
+func init() {
+	if os.Getenv("DEBUG") == "true" {
+		DEBUG = true
+	}
+}
 
 func main() {
 	// Some initial Twitter setup
@@ -47,6 +55,8 @@ func main() {
 		log.Fatalln("Cannot connect to proxy:", err)
 	}
 
+	debugPrint("Connected to proxy")
+
 	httpTransport := &http.Transport{
 		Dial: proxyDial.Dial,
 		TLSClientConfig: &tls.Config{
@@ -63,20 +73,29 @@ func main() {
 		logTmp.Date = time.Now().Add(time.Hour * -5)
 	}
 
-	stats, err := cmpscraper.GetStats(httpClient)
+	debugPrint("Tmp logs: %+v", logTmp)
+
+	cmpScraper, err := cmpscraper.New(&cmpscraper.CMP{
+		Client: httpClient,
+	})
+	if err != nil {
+		log.Fatalln("Cannot create scraper:", err)
+	}
+
+	stats, err := cmpScraper.GetOutageStats()
 	if err != nil {
 		log.Fatalln("Cannot get stats:", err)
 	}
-	fmt.Printf("%+v\r\n", stats)
+	log.Printf("%+v", stats)
 
 	if stats.NoOutages {
-		fmt.Println("No current outages")
+		log.Println("No current outages")
 
 		return
 	}
 
 	if stats.LastUpdate.Format("2006-Jan-02/15:04") == logTmp.Date.Format("2006-Jan-02/15:04") {
-		fmt.Println("No new updates.")
+		log.Println("No new updates.")
 		return
 	}
 
@@ -126,37 +145,7 @@ func main() {
 	mqttClient.Disconnect(250)
 }
 
-func readCache(f string) (Cache, error) {
-	var logTmp Cache
-	rawdata, err := os.ReadFile(f)
-	if err != nil {
-		return Cache{}, err
-	}
-
-	err = json.Unmarshal(rawdata, &logTmp)
-	if err != nil {
-		return Cache{}, err
-	}
-
-	return logTmp, nil
-}
-
-func writeCache(f string, logTmp Cache) error {
-	jsonData, err := json.Marshal(logTmp)
-	if err != nil {
-		return err
-	}
-
-	_ = jsonData
-	err = os.WriteFile(f, jsonData, 0644)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func buildMessages(stats cmpscraper.CMP) []string {
+func buildMessages(stats cmpscraper.CMPPowerStats) []string {
 	var statList []string
 
 	totalCust, err := strconv.ParseFloat(strings.ReplaceAll(stats.Total, ",", ""), 64)

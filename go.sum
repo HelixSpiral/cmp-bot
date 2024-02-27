@@ -1,5 +1,5 @@
-github.com/HelixSpiral/cmpscraper v0.0.0-20231227010039-e45697d7adac h1:GyPVc13fZB0X3Y8gjjg3W+ql8p5iKP42cLtqbyTngJE=
-github.com/HelixSpiral/cmpscraper v0.0.0-20231227010039-e45697d7adac/go.mod h1:EfFK8HYDRQIWLpn8XEy6YL4yf6EfS9PmkM3o9MtLpIc=
+github.com/HelixSpiral/cmpscraper/v2 v2.0.1 h1:XQjVUFbXTy3WRY6WFwY10AIVZoK5MevykujeC4wpO3k=
+github.com/HelixSpiral/cmpscraper/v2 v2.0.1/go.mod h1:Of9Mqq3Rj4TdrE1/84g4sKkZLipcmmvZVIcXL7D9u04=
 github.com/eclipse/paho.mqtt.golang v1.4.3 h1:2kwcUGn8seMUfWndX0hGbvH8r7crgcJguQNCyp70xik=
 github.com/eclipse/paho.mqtt.golang v1.4.3/go.mod h1:CSYvoAlsMkhYOXh/oKyxa8EcBci6dVkLCbo5tTC1RIE=
 github.com/gorilla/websocket v1.5.1 h1:gmztn0JnHVt9JZquRuzLw3g4wouNVzKL15iLr/zn/QY=

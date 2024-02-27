@@ -3,7 +3,7 @@ module github.com/HelixSpiral/cmp-bot
 go 1.19
 
 require (
-	github.com/HelixSpiral/cmpscraper v0.0.0-20231227010039-e45697d7adac
+	github.com/HelixSpiral/cmpscraper/v2 v2.0.1
 	github.com/eclipse/paho.mqtt.golang v1.4.3
 	github.com/hashicorp/go.net v0.0.1
 )
