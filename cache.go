@@ -17,6 +17,8 @@ func readCache(f string) (Cache, error) {
 		return Cache{}, err
 	}
 
+	debugPrint("logTmp: %+v", logTmp)
+
 	return logTmp, nil
 }
 
@@ -31,6 +33,8 @@ func writeCache(f string, logTmp Cache) error {
 	if err != nil {
 		return err
 	}
+
+	debugPrint("jsonData, err: %+v, %+v", jsonData, err)
 
 	return nil
 }

@@ -52,7 +52,7 @@ func main() {
 
 	proxyDial, err := proxy.SOCKS5("tcp", proxyIp, nil, proxy.Direct)
 	if err != nil {
-		log.Fatalln("Cannot connect to proxy:", err)
+		log.Fatal("Cannot connect to proxy:", err)
 	}
 
 	debugPrint("Connected to proxy")
@@ -79,12 +79,12 @@ func main() {
 		Client: httpClient,
 	})
 	if err != nil {
-		log.Fatalln("Cannot create scraper:", err)
+		log.Fatal("Cannot create scraper:", err)
 	}
 
 	stats, err := cmpScraper.GetOutageStats()
 	if err != nil {
-		log.Fatalln("Cannot get stats:", err)
+		log.Fatal("Cannot get stats:", err)
 	}
 	log.Printf("%+v", stats)
 
@@ -128,6 +128,8 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
+
+		debugPrint("Sending message: %s", y)
 
 		token := mqttClient.Publish(mqttTopic, 2, false, jsonMsg)
 		_ = token.Wait()
@@ -179,6 +181,8 @@ func buildMessages(stats cmpscraper.CMPPowerStats) []string {
 		statsMsg := fmt.Sprintf("CMP[County: %s]: Total Customers: %s | Customers Without Power: %s (%.03f%%) | Last updated: %s.", x, y.Total, y.WithoutPower, percentOut, stats.LastUpdate.Format("2006-Jan-02/15:04"))
 		statList = append(statList, statsMsg)
 	}
+
+	debugPrint("statList: %+v", statList)
 
 	return statList
 }
