@@ -50,18 +50,22 @@ func main() {
 	// Proxy needed for hitting the CMP site
 	proxyIp := os.Getenv("PROXY_IP")
 
-	proxyDial, err := proxy.SOCKS5("tcp", proxyIp, nil, proxy.Direct)
-	if err != nil {
-		log.Fatal("Cannot connect to proxy:", err)
-	}
+	httpTransport := &http.Transport{}
 
-	debugPrint("Connected to proxy")
+	if proxyIp != "" {
+		proxyDial, err := proxy.SOCKS5("tcp", proxyIp, nil, proxy.Direct)
+		if err != nil {
+			log.Fatal("Cannot connect to proxy:", err)
+		}
 
-	httpTransport := &http.Transport{
-		Dial: proxyDial.Dial,
-		TLSClientConfig: &tls.Config{
-			InsecureSkipVerify: true,
-		},
+		debugPrint("Connected to proxy")
+
+		httpTransport = &http.Transport{
+			Dial: proxyDial.Dial,
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
+		}
 	}
 
 	httpClient := &http.Client{
